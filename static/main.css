@@ -1,0 +1,12 @@
+body {
+    padding: 30px 30px;
+}
+
+h1 {
+    color: hsl(350, 100%, 80%);
+}
+
+h2 {
+    color: hsl(218, 49%, 40%);
+    background: hsl(350, 100%, 80%);
+}

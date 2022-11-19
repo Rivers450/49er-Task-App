@@ -27,11 +27,11 @@ with app.app_context():
 # In this case it makes it so anyone going to "your-url/" makes this function
 # get called. What it returns is what is shown as the web page
 @app.route('/')
-@app.route('/index')
+@app.route('/home')
 def index():
     if session.get('user'):
-        return render_template("index.html", user=session['user'])
-    return render_template("index.html")
+        return render_template("home.html", user=session['user'])
+    return render_template("home.html")
 
 @app.route('/notes')
 def get_notes():
@@ -63,7 +63,7 @@ def new_note():
             from datetime import date
             today = date.today()
 
-            today = today.strftime("%m-%d-%Y")
+            today = today.strftime("%Y-%m-%d")
             new_record = Note(title, text, today, session['user_id'])
             db.session.add(new_record)
             db.session.commit()

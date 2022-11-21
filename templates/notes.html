@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="UNCC Notes App">
+        <title>UNCC Notes App - View your Notes</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+    <body>
+        <div class = "topnav">
+            <nav>
+                <a href="{{ url_for('index') }} "><br>Home<br><br></a>
+                <a href="{{ url_for('logout') }}"><br>Log out<br><br></a>
+                <a href="{{ url_for('contact') }}"><br>Contact Us<br><br></a>
+            </nav>
+            </div>
+    <h1>Welcome {{user}} to your personal portfolio.</h1>
+            <h1>Listing notes</h1>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+            </tr>
+            {% for note in notes %}
+            <tr>
+                <td><a href= "{{url_for('get_note', note_id=note.id)}}">{{ note.title }}</a></td>
+                <td>{{ note.date }}</td>
+                <td><a href= "{{url_for('update_note', note_id=note.id)}}">Edit</a></td>
+                <td>
+                    <form action="{{ url_for('delete_note', note_id=note.id) }}" method="post">
+                        <input type="sumbit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a id = "new"  href="{{url_for('new_note')}}">Add note</a>
+    </body>
+</html>

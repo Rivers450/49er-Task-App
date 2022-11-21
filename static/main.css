@@ -1,19 +1,30 @@
 h1 {
     text-align: center;
+    padding: 1em;
 
 }
 
 h2 {
     color: hsl(218, 49%, 40%);
     text-align:center;
-
 }
+
 *,
 *:before,
 *:after{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+a{ 
+    position: relative;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    font-size:18px;
+    letter-spacing: 0.5px;
+    padding: 1em;
 }
 
 nav{
@@ -27,21 +38,10 @@ nav{
     
 }
 
-a{
-    position: relative;
-    text-decoration: none;
-    font-family: "Poppins", sans-serif;
-    color: white;
-    font-size:18px;
-    letter-spacing: 0.5px;
-    padding:0 10px;
-
-}
-
 a:after{
     content: "";
     position: absolute;
-    background-color: red;
+    background-color: hsl(218, 49%, 40%);;
     height: 3px;
     width: 0;
     left: 0;
@@ -55,8 +55,25 @@ a:hover:after{
 .topnav {
     background-color: #333;
 }
-
-#new{
+.new {
     color: black;
-    font-family: sans-serif;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 16px;
 }
+.title{
+    background-color: white;
+    border-style: none
+}
+
+textarea {
+    width: 50%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #edf6f9;
+    font-size: 16px;
+    resize: none;
+  }

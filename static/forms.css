@@ -25,7 +25,6 @@ form {
 
 label {
   font-size: .9em;
-  color: hsl(350, 100%, 80%);
   margin-bottom: 3px;
   display: block;
   font-weight: 300;
@@ -51,7 +50,6 @@ input[type="text"]:hover,
 input[type="password"]:hover,
 textarea:hover,
 select:hover {
-  border-color: hsl(350, 100%, 80%);
   background: lightyellow;
 }
 
@@ -59,12 +57,10 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 textarea:focus {
   background: white;
-  border-color: hsl(350, 100%, 80%);
   box-shadow: unset;
 }
 
 input[type="submit"] {
-  background: hsl(350, 100%, 80%);
   border: 0;
   color: white;
   border-radius: 2px;
@@ -77,7 +73,6 @@ input[type="submit"] {
 input[type="submit"]:hover {
   cursor: pointer;
   background: white;
-  color: hsl(350, 100%, 80%);
 }
 
 .success-wrapper {
@@ -109,7 +104,6 @@ input[type="submit"]:hover {
 i {
   position: absolute;
   margin: auto;
-  top: 4px;
   bottom: 0;
   right: 16px;
   height: fit-content;

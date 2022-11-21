@@ -178,6 +178,15 @@ def new_comment(note_id):
     else:
         return redirect(url_for('login'))
 
+@app.route('/contactUs')
+def contact():
+        return render_template("contactUs.html")
+
+@app.route('/success')
+def success():
+    return render_template("success.html")
+
+
 app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
 
 # To see the web page in your web browser, go to the url,

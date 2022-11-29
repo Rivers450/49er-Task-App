@@ -1,20 +1,25 @@
 from database import db
 import datetime
 
+
 class Note(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)
     title = db.Column("title", db.String(200))
     text = db.Column("text", db.String(100))
     date = db.Column("date", db.String(50))
+    uses_latex = db.Column("uses LaTeX", db.boolean())
     # can create a foreign key; referencing the id variable in the User class, so that is why it is lowercase u
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    comments = db.relationship("Comment", backref="note", cascade="all, delete-orphan", lazy=True)
+    comments = db.relationship(
+        "Comment", backref="note", cascade="all, delete-orphan", lazy=True
+    )
 
     def __init__(self, title, text, date, user_id):
         self.title = title
         self.text = text
         self.date = date
         self.user_id = user_id
+
 
 class User(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)
@@ -32,6 +37,7 @@ class User(db.Model):
         self.email = email
         self.password = password
         self.registered_on = datetime.date.today()
+
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)

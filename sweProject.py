@@ -12,7 +12,7 @@ from forms import LoginForm
 import bcrypt
 from models import Comment as Comment
 from forms import RegisterForm, LoginForm, CommentForm
-import SymPy
+import sympy
 
 app = Flask(__name__)  # create an app
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sweDatabase.db"
@@ -55,7 +55,10 @@ def get_note(note_id):
             .one()
         )
 
-        text = my_note.text
+        # TODO: Add checkbox in note.html
+        # TODO: Add image to note.html
+        if my_note.uses_latex:
+            sympy.preview(my_note.text, viewer="file", filename="test.png")
 
         form = CommentForm()
         return render_template(

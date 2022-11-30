@@ -57,6 +57,7 @@ def get_note(note_id):
 
         form = CommentForm()
 
+        # TODO: Error detection for if no LaTeX found
         sympy.preview(my_note.text, viewer="file", filename="static\\latex.png", euler = False)
 
         return render_template(

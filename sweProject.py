@@ -55,14 +55,18 @@ def get_note(note_id):
             .one()
         )
 
+        form = CommentForm()
+
         # TODO: Add checkbox in note.html
         # TODO: Add image to note.html
-        if my_note.uses_latex:
-            sympy.preview(my_note.text, viewer="file", filename="test.png")
+        sympy.preview(my_note.text, viewer="file", filename="static\\latex.png", euler = False)
 
-        form = CommentForm()
         return render_template(
-            "note.html", note=my_note, user=session["user"], form=form
+            "note.html",
+            note=my_note,
+            user=session["user"],
+            form=form,
+            latex=my_note.uses_latex
         )
     else:
         return redirect(url_for("login"))
@@ -75,13 +79,19 @@ def new_note():
         if request.method == "POST":
             title = request.form["title"]
             text = request.form["noteText"]
+            latex = request.form.get("latex")
+            if latex == "1":
+                latex = 1
+            else:
+                latex = 0
+            print(latex)
 
             from datetime import date
 
             today = date.today()
 
             today = today.strftime("%Y-%m-%d")
-            new_record = Note(title, text, today, session["user_id"])
+            new_record = Note(title, text, today, latex, session["user_id"])
             db.session.add(new_record)
             db.session.commit()
 
@@ -101,7 +111,20 @@ def update_note(note_id):
             note = db.session.query(Note).filter_by(id=note_id).one()
             note.title = title
             note.text = text
-            db.session.add(note)
+            latex = request.form.get("latex")
+            if latex == "1":
+                latex = 1
+            else:
+                latex = 0
+            print(latex)
+
+            from datetime import date
+
+            today = date.today()
+
+            today = today.strftime("%Y-%m-%d")
+            new_record = Note(title, text, today, latex, session["user_id"])
+            db.session.add(new_record)
             db.session.commit()
 
             return redirect(url_for("get_notes"))

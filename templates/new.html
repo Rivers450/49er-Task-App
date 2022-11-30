@@ -31,20 +31,25 @@
             <p><input type="text" name="title" value="{% if note %}{{note.title}} {% endif %}" /></p>
             <p><label>Task description </label></p>
             <p>
-                <textarea name="noteText" rows="6" cols="0">
+                <!-- Removes weird whitespace -->
                 {% if note %}
-                    {{note.text}}
+                <textarea name="noteText" rows="6" cols="0">{{note.text}}</textarea>
                 {% else %}
-                    Add your task description here ...
+                <textarea name="noteText" rows="6" cols="0" value="Add your task description here ..."></textarea>
                 {% endif %}
-            </textarea>
             </p>
             {% if note %}
             <input type="submit" value="Update Note" />
+            {% if note.uses_latex == 1%}
+            <p><input type="checkbox" name="latex" value="1" checked>Use LaTeX</p>
+            {% else %}
+            <p><input type="checkbox" name="latex" value="1">Use LaTeX</p>
+            {% endif %}
             {% else %}
             <p><input type="submit" value="Add Note" /></p>
+            <p><input type="checkbox" name="latex" value="1">Use LaTeX</p>
             {% endif %}
-            <p><input type="checkbox" name="latex" , value="1">Use LaTeX</p>
+
         </form>
 </body>
 

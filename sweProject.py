@@ -57,8 +57,6 @@ def get_note(note_id):
 
         form = CommentForm()
 
-        # TODO: Add checkbox in note.html
-        # TODO: Add image to note.html
         sympy.preview(my_note.text, viewer="file", filename="static\\latex.png", euler = False)
 
         return render_template(
@@ -106,25 +104,21 @@ def new_note():
 def update_note(note_id):
     if session.get("user"):
         if request.method == "POST":
+
             title = request.form["title"]
             text = request.form["noteText"]
             note = db.session.query(Note).filter_by(id=note_id).one()
             note.title = title
             note.text = text
+
             latex = request.form.get("latex")
             if latex == "1":
                 latex = 1
             else:
                 latex = 0
-            print(latex)
-
-            from datetime import date
-
-            today = date.today()
-
-            today = today.strftime("%Y-%m-%d")
-            new_record = Note(title, text, today, latex, session["user_id"])
-            db.session.add(new_record)
+            note.uses_latex = latex
+            
+            db.session.add(note)
             db.session.commit()
 
             return redirect(url_for("get_notes"))

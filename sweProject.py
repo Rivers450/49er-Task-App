@@ -57,15 +57,19 @@ def get_note(note_id):
 
         form = CommentForm()
 
-        # TODO: Error detection for if no LaTeX found
-        sympy.preview(my_note.text, viewer="file", filename="static\\latex.png", euler = False)
+        try:
+            sympy.preview(
+                my_note.text, viewer="file", filename="static\\latex.png", euler=False
+            )
+        except RuntimeError:
+            return "<h1>Error: Invalid LaTeX</h1>"
 
         return render_template(
             "note.html",
             note=my_note,
             user=session["user"],
             form=form,
-            latex=my_note.uses_latex
+            latex=my_note.uses_latex,
         )
     else:
         return redirect(url_for("login"))
@@ -118,7 +122,7 @@ def update_note(note_id):
             else:
                 latex = 0
             note.uses_latex = latex
-            
+
             db.session.add(note)
             db.session.commit()
 

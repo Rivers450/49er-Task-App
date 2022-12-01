@@ -1,81 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
 </head>
-    <body>
-        {% if user %}
-	<nav>
-		<a href="{{ url_for('logout') }}">Logout</a>
-	</nav>
+
+<body>
+    {% if user %}
+    <nav>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
     {% else %}
     <div class="topnav">
-	<nav>
-        <a href="{{ url_for('index') }} ">Home</a>
-		<a href="{{ url_for('login')}}">Log In</a>
-        <a href="{{ url_for('contact') }}">Contact Us</a>
-	</nav>
+        <nav>
+            <a href="{{ url_for('index') }} ">Home</a>
+            <a href="{{ url_for('login')}}">Log In</a>
+            <a href="{{ url_for('contact') }}">Contact Us</a>
+        </nav>
     </div>
     {% endif %}
 
-	
-        <h1>Welcome {% if user %}{{user}}{% endif %}to the 49er Notes App!</h1>
 
-        <h2>Use this site to maintain and organize your notes.</h2>
-        <div class="formwrapper">
-            <h2 class="title">Register</h2>
-            <form method="POST" action="/register">
-                <div class="form-field">{{ form.firstname.label }} {{ form.firstname }}
-                    {% if form.firstname.errors %}
-                    <ul class="errors">
-                        {% for error in form.firstname.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                <div class="form-field">{{ form.lastname.label }} {{ form.lastname }}
-                    {% if form.lastname.errors %}
-                    <ul class="errors">
-                        {% for error in form.lastname.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                <div class="form-field">{{ form.email.label }} {{ form.email }}
-                    {% if form.email.errors %}
-                    <ul class="errors">
-                        {% for error in form.email.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                <div class="form-field">{{ form.password.label }} {{ form.password }}
-                    {% if form.password.errors %}
-                    <ul class="errors">
-                        {% for error in form.password.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                <div class="form-field">{{ form.confirmPassword.label }} {{ form.confirmPassword }}
-                    {% if form.confirmPassword.errors %}
-                    <ul class="errors">
-                        {% for error in form.confirmPassword.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                {{ form.submit }}
-            </form>
+    <h1>Welcome {% if user %}{{user}}{% endif %}to the 49er Notes App!</h1>
 
-        </div>
-    </body>
+    <h2>Use this site to maintain and organize your notes.</h2>
+    <div class="formwrapper">
+        <h2 class="title">Register</h2>
+        <form method="POST" action="/register">
+            <div class="form-field">{{ form.firstname.label }} {{ form.firstname }}
+                {% if form.firstname.errors %}
+                <ul class="errors">
+                    {% for error in form.firstname.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">{{ form.lastname.label }} {{ form.lastname }}
+                {% if form.lastname.errors %}
+                <ul class="errors">
+                    {% for error in form.lastname.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">{{ form.email.label }} {{ form.email }}
+                {% if form.email.errors %}
+                <ul class="errors">
+                    {% for error in form.email.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">{{ form.password.label }} {{ form.password }}
+                {% if form.password.errors %}
+                <ul class="errors">
+                    {% for error in form.password.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">{{ form.confirmPassword.label }} {{ form.confirmPassword }}
+                {% if form.confirmPassword.errors %}
+                <ul class="errors">
+                    {% for error in form.confirmPassword.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {{ form.submit }}
+        </form>
+
+    </div>
+</body>
+
 </html>

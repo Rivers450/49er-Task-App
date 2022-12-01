@@ -236,9 +236,29 @@ def contact():
 def success():
     return render_template("success.html")
 
+
 @app.route("/account")
 def account():
     return render_template("account.html")
+
+
+@app.route("/account/delete", methods=["GET", "POST"])
+def delete_account():
+    if session.get("user"):
+
+        current_user_id = session["user_id"]
+
+        # Delete comments, notes, and user
+        db.session.query(Comment).filter_by(user_id=current_user_id).delete()
+        db.session.query(Note).filter_by(user_id=current_user_id).delete()
+        db.session.query(User).filter_by(id=current_user_id).delete()
+
+        db.session.commit()
+        session.clear()
+        return redirect(url_for("index"))
+    else:
+        return redirect(url_for("login"))
+
 
 app.run(
     host=os.getenv("IP", "127.0.0.1"), port=int(os.getenv("PORT", 5000)), debug=True

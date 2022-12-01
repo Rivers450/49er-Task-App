@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Profile</title>
-    <link rel = "stylesheet" href = "{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 
 </head>
+
 <body>
 
-<div class="topnav">
-    <nav>
-        <a href ="{{url_for('index') }}">Home</a>
-        <a href="{{ url_for('get_notes') }}">My Tasks</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-        <a href="{{ url_for('account') }} ">Profile</a>
-    </nav>
-</div>
+    <div class="topnav">
+        <nav>
+            <a href="{{url_for('index') }}">Home</a>
+            <a href="{{ url_for('get_notes') }}">My Tasks</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('account') }} ">Profile</a>
+        </nav>
+    </div>
 
-    <button>Delete account</button>
+    <form action="{{ url_for('delete_account')}}" method="post">
+        <input type="submit" value="Delete Account">
+    </form>
+
 </body>
+
 </html>

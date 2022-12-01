@@ -236,6 +236,9 @@ def contact():
 def success():
     return render_template("success.html")
 
+@app.route("/account")
+def account():
+    return render_template("account.html")
 
 app.run(
     host=os.getenv("IP", "127.0.0.1"), port=int(os.getenv("PORT", 5000)), debug=True

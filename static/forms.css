@@ -1,10 +1,15 @@
-form {
+form{
   background: white;
   width: 100%;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .form-field {
-  position: relative;
+  display: block;
+  text-align: center;
 }
 
 .title {
@@ -16,7 +21,8 @@ form {
 }
 
 .formwrapper {
-  position: relative;
+  margin: auto;
+  position: center;
   background: white;
   width: 350px;
   box-shadow: 0 0 5px rgba(65, 67, 144, 0.1);
@@ -62,17 +68,19 @@ textarea:focus {
 
 input[type="submit"] {
   border: 0;
-  color: white;
+  color: black;
   border-radius: 2px;
   margin-top: 15px;
   font-weight: 400;
   border: 1px solid hsl(350, 100%, 80%);
   transition: all .3s ease-out;
+  background: white;
 }
 
 input[type="submit"]:hover {
   cursor: pointer;
-  background: white;
+  background: green;
+  color: white;
 }
 
 .success-wrapper {

@@ -7,6 +7,7 @@ class Note(db.Model):
     title = db.Column("title", db.String(200))
     text = db.Column("text", db.String(100))
     date = db.Column("date", db.String(50))
+    # 0 is false, 1 is true
     uses_latex = db.Column(db.Integer, default=0, nullable=False)
     # can create a foreign key; referencing the id variable in the User class, so that is why it is lowercase u
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
@@ -28,16 +29,20 @@ class User(db.Model):
     last_name = db.Column("last_name", db.String(100))
     email = db.Column("email", db.String(100))
     password = db.Column(db.String(255), nullable=False)
+    # 0 is dark mode, 1 is light mode
+    view_mode = db.Column("view_mode", db.Integer, default=0, nullable=False)
     registered_on = db.Column(db.DateTime, nullable=False)
-    notes = db.relationship("Note", backref="user", lazy=True)
-    comments = db.relationship("Comment", backref="user", lazy=True)
+    notes = db.relationship(
+        "Note", backref="note", cascade="all, delete-orphan", lazy=True
+    )
 
-    def __init__(self, first_name, last_name, email, password):
+    def __init__(self, first_name, last_name, email, password, view_mode):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.password = password
         self.registered_on = datetime.date.today()
+        self.view_mode = view_mode
 
 
 class Comment(db.Model):

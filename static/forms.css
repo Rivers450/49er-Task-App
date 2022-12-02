@@ -67,6 +67,10 @@ textarea:focus {
 }
 
 input[type="submit"] {
+  margin: auto;
+  position: center;
+  display: block;
+  text-align: center;
   border: 0;
   color: black;
   border-radius: 2px;

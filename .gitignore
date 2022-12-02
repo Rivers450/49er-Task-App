@@ -1,2 +1,3 @@
 venv/**
 latex.png
+__pycache__/**

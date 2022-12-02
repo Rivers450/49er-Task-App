@@ -205,6 +205,7 @@ def logout():
     # check if a user is saved in session
     if session.get("user"):
         session.clear()
+        mode_switch(0)
 
     return redirect(url_for("index"))
 
@@ -272,16 +273,21 @@ def change_mode():
         user.view_mode %= 2
         mode = user.view_mode
 
-        # list of files to change
-        for file in ["forms", "main"]:
-            with open("static\\mode{0}\\{1}{0}.css".format(mode, file)) as input:
-                with open("static\\{0}.css".format(file), "w") as output:
-                    output.write(input.read())
+        mode_switch(mode)
 
         db.session.commit()
         return redirect(url_for("account"))
     else:
         return redirect(url_for("login"))
+
+
+# switches modes to input
+def mode_switch(mode):
+    # list of files to change
+    for file in ["forms", "main"]:
+        with open("static\\mode{0}\\{1}{0}.css".format(mode, file)) as input:
+            with open("static\\{0}.css".format(file), "w") as output:
+                output.write(input.read())
 
 
 app.run(

@@ -4,12 +4,14 @@ body {
 
 th, td, tr{ color:white;}
 
+.col-md-6, .col-md-8, .col-md-4, .col-md-12{
+    color:white;
+}
 p{
     text-align:center;
     color:white;
 }
 .centerBtn{
-    align-items: center;
     text-align:center;
 }
 

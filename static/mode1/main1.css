@@ -2,7 +2,15 @@ body {
     background-color: white;
 }
 
+p{
+    text-align:center;
+    color:black;
+}
 
+.centerBtn{
+    align-items: center;
+    text-align:center;
+}
 h1 {
     text-align: center;
     padding: 1em;

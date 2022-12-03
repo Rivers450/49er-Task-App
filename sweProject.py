@@ -240,6 +240,8 @@ def success():
 
 @app.route("/account")
 def account():
+    if session.get("user"):
+        return render_template("account.html", user=session["user"])
     return render_template("account.html")
 
 

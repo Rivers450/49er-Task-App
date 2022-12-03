@@ -2,6 +2,14 @@ body {
     background-color: black;
 }
 
+p{
+    text-align:center;
+    color:white;
+}
+.centerBtn{
+    align-items: center;
+    text-align:center;
+}
 
 h1 {
     color: white;

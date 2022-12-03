@@ -1,0 +1,12 @@
+There were 4 different features that we implented for this Sprint.
+
+1. The first feature is a working contact form page. in which when the user clicks on the submit button it will send an email to swecontactform@gmail.com 
+with what the user put in the text fields
+
+2. The second feature is Latex rending when creating a note/task. In which if you click the extra checkbox it will allow for latex rending. 
+
+3. The third feature is a delete account button (under the profile in the navigation tab). This will allow for the user to delete his account, in which it will
+remove all of his sign in fuctionality. In which when the user clicks on the delete account we will take them back to the home page.
+
+4. The fourth feature is a light mode/dark mode. When you click the button (under the profile in the navigation tab). It will change the background color
+of every html page

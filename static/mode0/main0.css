@@ -2,6 +2,8 @@ body {
     background-color: black;
 }
 
+th, td, tr{ color:white;}
+
 p{
     text-align:center;
     color:white;

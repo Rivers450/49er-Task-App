@@ -1,20 +1,19 @@
 body {
-    background-color: black;
+    background-color: white;
 }
 
 th, td, tr{ color:white;}
 
 p{
     text-align:center;
-    color:white;
+    color:black;
 }
+
 .centerBtn{
     align-items: center;
     text-align:center;
 }
-
 h1 {
-    color: white;
     text-align: center;
     padding: 1em;
 

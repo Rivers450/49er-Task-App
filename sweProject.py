@@ -57,12 +57,16 @@ def get_note(note_id):
 
         form = CommentForm()
 
-        try:
-            sympy.preview(
-                my_note.text, viewer="file", filename="static\\latex.png", euler=False
-            )
-        except RuntimeError:
-            return "<h1>Error: Invalid LaTeX</h1>"
+        if my_note.uses_latex:
+            try:
+                sympy.preview(
+                    my_note.text,
+                    viewer="file",
+                    filename="static\\latex.png",
+                    euler=False,
+                )
+            except RuntimeError:
+                return "<h1>Error: Invalid LaTeX</h1>"
 
         return render_template(
             "note.html",
@@ -252,8 +256,8 @@ def delete_account():
         current_user_id = session["user_id"]
 
         # Delete comments, notes, and user
-        db.session.query(Comment).filter_by(user_id=current_user_id).delete()
-        db.session.query(Note).filter_by(user_id=current_user_id).delete()
+        # db.session.query(Comment).filter_by(user_id=current_user_id).delete()
+        # db.session.query(Note).filter_by(user_id=current_user_id).delete()
         db.session.query(User).filter_by(id=current_user_id).delete()
 
         db.session.commit()

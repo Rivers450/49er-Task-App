@@ -19,16 +19,20 @@
             <a href="{{ url_for('account') }} ">Profile</a>
         </nav>
     </div>
-    
-    <br><br><p><b><u>First Name:</u> {{user}}</b></p><br>
-    <div class = "centerBtn">
-    <form action="{{ url_for('change_mode')}}" method="post">
-        <input type="submit" value="Change Color Scheme">
-    </form>
+
+    <br><br>
+    <p><b><u>First Name:</u> {{user.first_name}}</b></p><br>
+    <p><b><u>Last Name:</u> {{user.last_name}}</b></p><br>
+    <p><b><u>Email:</u> {{user.email}}</b></p><br>
+    <!-- TODO: Add password change -->
+    <div class="centerBtn">
+        <form action="{{ url_for('change_mode')}}" method="post">
+            <input type="submit" value="Change Color Scheme">
+        </form>
         <form action="{{ url_for('delete_account')}}" method="post">
             <input type="submit" value="Delete Account">
         </form>
-</div>
+    </div>
 </body>
 
 </html>

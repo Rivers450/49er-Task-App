@@ -1,19 +1,22 @@
 body {
-    background-color: white;
+    background-color: black;
 }
 
 th, td, tr{ color:white;}
 
+.col-md-6, .col-md-8, .col-md-4, .col-md-12{
+    color:white;
+}
 p{
     text-align:center;
-    color:black;
+    color:white;
 }
-
 .centerBtn{
-    align-items: center;
     text-align:center;
 }
+
 h1 {
+    color: white;
     text-align: center;
     padding: 1em;
 

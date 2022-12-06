@@ -1,0 +1,7 @@
+display first/last/email
+change HTML to user.* instead of user
+
+refactor CSS
+import CSS Vars
+add color picker
+add admin account

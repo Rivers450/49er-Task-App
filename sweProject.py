@@ -13,6 +13,7 @@ import bcrypt
 from models import Comment as Comment
 from forms import RegisterForm, LoginForm, CommentForm
 import sympy
+import helperFuncs as help
 
 app = Flask(__name__)  # create an app
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sweDatabase.db"
@@ -209,7 +210,7 @@ def logout():
     # check if a user is saved in session
     if session.get("user"):
         session.clear()
-        mode_switch(0)
+        help.mode_switch(0)
 
     return redirect(url_for("index"))
 
@@ -245,8 +246,10 @@ def success():
 @app.route("/account")
 def account():
     if session.get("user"):
-        return render_template("account.html", user=session["user"])
-    return render_template("account.html")
+        user = help.getCurrentUser()
+
+        return render_template("account.html", user=user)
+    return redirect(url_for("login"))
 
 
 @app.route("/account/delete", methods=["GET", "POST"])
@@ -279,21 +282,12 @@ def change_mode():
         user.view_mode %= 2
         mode = user.view_mode
 
-        mode_switch(mode)
+        help.mode_switch(mode)
 
         db.session.commit()
         return redirect(url_for("account"))
     else:
         return redirect(url_for("login"))
-
-
-# switches modes to input
-def mode_switch(mode):
-    # list of files to change
-    for file in ["forms", "main"]:
-        with open("static\\mode{0}\\{1}{0}.css".format(mode, file)) as input:
-            with open("static\\{0}.css".format(file), "w") as output:
-                output.write(input.read())
 
 
 app.run(

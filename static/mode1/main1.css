@@ -2,7 +2,9 @@ body {
     background-color: white;
 }
 
-th, td, tr{ color:white;}
+th, td, tr{ 
+    color:black;
+}
 
 p{
     text-align:center;

@@ -20,7 +20,7 @@
             <a href="{{ url_for('account') }}">Profile</a>
         </nav>
     </div>
-    <h1>Welcome {{user}} to your personal portfolio.</h1>
+    <h1>Welcome {{user.first_name}} to your personal portfolio.</h1>
     <h1>My tasks:</h1>
     <form action="{{url_for('new_note')}}">
         <input type="submit" value="Add note">

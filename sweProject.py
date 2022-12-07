@@ -32,17 +32,19 @@ with app.app_context():
 @app.route("/home")
 def index():
     if session.get("user"):
-        return render_template("home.html", user=session["user"])
+        user = help.getCurrentUser()
+        return render_template("home.html", user=user)
     return render_template("home.html")
 
 
 @app.route("/notes")
 def get_notes():
     if session.get("user"):
+        user = help.getCurrentUser()
 
-        my_notes = db.session.query(Note).filter_by(user_id=session["user_id"]).all()
+        my_notes = db.session.query(Note).filter_by(user_id=user.id).all()
 
-        return render_template("notes.html", notes=my_notes, user=session["user"])
+        return render_template("notes.html", notes=my_notes, user=user)
     else:
         return redirect(url_for("login"))
 
@@ -50,11 +52,8 @@ def get_notes():
 @app.route("/notes/<note_id>")
 def get_note(note_id):
     if session.get("user"):
-        my_note = (
-            db.session.query(Note)
-            .filter_by(id=note_id, user_id=session["user_id"])
-            .one()
-        )
+        user = help.getCurrentUser()
+        my_note = db.session.query(Note).filter_by(id=note_id, user_id=user.id).one()
 
         form = CommentForm()
 
@@ -72,7 +71,7 @@ def get_note(note_id):
         return render_template(
             "note.html",
             note=my_note,
-            user=session["user"],
+            user=user,
             form=form,
             latex=my_note.uses_latex,
         )
@@ -83,6 +82,7 @@ def get_note(note_id):
 @app.route("/notes/new", methods=["GET", "POST"])
 def new_note():
     if session.get("user"):
+        user = help.getCurrentUser()
 
         if request.method == "POST":
             title = request.form["title"]
@@ -99,13 +99,13 @@ def new_note():
             today = date.today()
 
             today = today.strftime("%Y-%m-%d")
-            new_record = Note(title, text, today, latex, session["user_id"])
+            new_record = Note(title, text, today, latex, user.id)
             db.session.add(new_record)
             db.session.commit()
 
             return redirect(url_for("get_notes"))
         else:
-            return render_template("new.html", user=session["user"])
+            return render_template("new.html", user=user)
     else:
         return redirect(url_for("login"))
 
@@ -113,6 +113,8 @@ def new_note():
 @app.route("/notes/edit/<note_id>", methods=["GET", "POST"])
 def update_note(note_id):
     if session.get("user"):
+        user = help.getCurrentUser()
+
         if request.method == "POST":
 
             title = request.form["title"]
@@ -134,7 +136,7 @@ def update_note(note_id):
             return redirect(url_for("get_notes"))
         else:
             my_note = db.session.query(Note).filter_by(id=note_id).one()
-            return render_template("new.html", note=my_note, user=session["user"])
+            return render_template("new.html", note=my_note, user=user)
     else:
         return redirect(url_for("login"))
 
@@ -143,6 +145,7 @@ def update_note(note_id):
 def delete_note(note_id):
     # retrieve note from database
     if session.get("user"):
+        user = help.getCurrentUser()
 
         my_note = db.session.query(Note).filter_by(id=note_id).one()
         db.session.delete(my_note)
@@ -212,18 +215,19 @@ def logout():
         session.clear()
         help.mode_switch(0)
 
-    return redirect(url_for("index"))
+    return redirect(url_for("home"))
 
 
 @app.route("/notes/<note_id>/comment", methods=["POST"])
 def new_comment(note_id):
     if session.get("user"):
+        user = help.getCurrentUser()
         comment_form = CommentForm()
         # validate_on_submit only validates using POST
         if comment_form.validate_on_submit():
             # get comment data
             comment_text = request.form["comment"]
-            new_record = Comment(comment_text, int(note_id), session["user_id"])
+            new_record = Comment(comment_text, int(note_id), user.id)
             db.session.add(new_record)
             db.session.commit()
 
@@ -255,13 +259,12 @@ def account():
 @app.route("/account/delete", methods=["GET", "POST"])
 def delete_account():
     if session.get("user"):
-
-        current_user_id = session["user_id"]
+        user = help.getCurrentUser()
 
         # Delete comments, notes, and user
         # db.session.query(Comment).filter_by(user_id=current_user_id).delete()
         # db.session.query(Note).filter_by(user_id=current_user_id).delete()
-        db.session.query(User).filter_by(id=current_user_id).delete()
+        db.session.query(User).filter_by(id=user.id).delete()
 
         db.session.commit()
         session.clear()
@@ -273,10 +276,9 @@ def delete_account():
 @app.route("/account/mode", methods=["GET", "POST"])
 def change_mode():
     if session.get("user"):
+        user = help.getCurrentUser()
 
-        current_user_id = session["user_id"]
-
-        user = db.session.query(User).filter_by(id=current_user_id).one()
+        user = db.session.query(User).filter_by(id=user.id).one()
         user.view_mode += 1
         # how many modes there are
         user.view_mode %= 2

@@ -1,7 +1,27 @@
-display first/last/email
-change HTML to user.* instead of user
+2022-12-06 11:59
+    ***FIX DELETING
+    **fix color modes everywhere
+        Check logged in vs logged out on every page
+            *Comments
+    display first/last/email on /accounts
+    change HTML to user.* instead of user in all HTML
+        use db session user instead of flask session user
 
-refactor CSS
-import CSS Vars
-add color picker
-add admin account
+After LDOC
+    --Just for fun
+    refactor CSS
+        Move colors to top
+        more built-in themes?
+        import CSS Vars
+    add color picker
+        Color selection
+            sliders OR
+            color grid OR
+            numerical entry (hex/rgb/hsl)
+        Colors in user DB
+            hex
+    --For demo purposes
+    add admin account
+        view and delete all users, notes, comments
+    Find sql visualizer
+        basic script calling select * every 5s?

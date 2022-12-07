@@ -1,10 +1,13 @@
-2022-12-06 11:59
-    ***FIX DELETING
-
 After LDOC
+    ***FIX DELETING
+        Currently brute force
+        fix sql backref
     "view note" button instead of click title
     Add login error page
     Write general delete function
+    fix stored date time
+        user/comment store a db.datetime (always 00:00:00.00000???)
+        note stores only date as string
     --Just for fun
     Password change
         form on /accounts

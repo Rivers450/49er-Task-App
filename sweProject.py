@@ -262,8 +262,8 @@ def delete_account():
         user = help.getCurrentUser()
 
         # Delete comments, notes, and user
-        # db.session.query(Comment).filter_by(user_id=current_user_id).delete()
-        # db.session.query(Note).filter_by(user_id=current_user_id).delete()
+        db.session.query(Comment).filter_by(user_id=user.id).delete()
+        db.session.query(Note).filter_by(user_id=user.id).delete()
         db.session.query(User).filter_by(id=user.id).delete()
 
         db.session.commit()

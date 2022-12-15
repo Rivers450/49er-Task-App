@@ -61,16 +61,12 @@ def get_note(note_id):
 
         form = CommentForm()
 
-        if my_note.uses_latex:
-            try:
-                sympy.preview(
-                    my_note.text,
-                    viewer="file",
-                    filename="static\\latex.png",
-                    euler=False,
-                )
-            except RuntimeError:
-                return "<h1>Error: Invalid LaTeX</h1>"
+        sympy.preview(
+            my_note.text,
+            viewer="file",
+            filename="static\\latex.png",
+            euler=False,
+        )
 
         return render_template(
             "note.html",

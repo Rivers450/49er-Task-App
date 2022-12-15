@@ -14,6 +14,7 @@ from models import Comment as Comment
 from forms import RegisterForm, LoginForm, CommentForm
 import sympy
 import helperFuncs as help
+from sqlalchemy import exc
 
 app = Flask(__name__)  # create an app
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sweDatabase.db"
@@ -31,9 +32,12 @@ with app.app_context():
 @app.route("/")
 @app.route("/home")
 def index():
-    if session.get("user"):
-        user = help.getCurrentUser()
-        return render_template("home.html", user=user)
+    try:
+        if session.get("user"):
+            user = help.getCurrentUser()
+            return render_template("home.html", user=user)
+    except exc.NoResultFound:
+        return redirect(url_for("logout"))
     return render_template("home.html")
 
 
@@ -215,7 +219,7 @@ def logout():
         session.clear()
         help.mode_switch(0)
 
-    return redirect(url_for("home"))
+    return redirect(url_for("index"))
 
 
 @app.route("/notes/<note_id>/comment", methods=["POST"])

@@ -2,8 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Your Notes App">
+    <title>Register</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
 </head>
@@ -24,8 +26,7 @@
     {% endif %}
 
 
-    <h1>Welcome {% if user %}{{user.first_name}}{% endif %}to the 49er Notes App!</h1>
-
+    <h1>Welcome to Our Task App!</h1>
     <h2>Use this site to maintain and organize your notes.</h2>
     <div class="formwrapper">
         <h2 class="title">Register</h2>

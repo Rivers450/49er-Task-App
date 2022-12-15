@@ -28,7 +28,7 @@ def renderLatex(latexString, filepath="static\\latex.png"):
     white = (255, 255, 255, 255)
 
     buf = io.BytesIO()
-    plt.rc("text", usetex=True)
+    plt.rc("text")
     plt.rc("font", family="serif")
     plt.axis("off")
     plt.text(0.05, 0.5, latexString, size=15)

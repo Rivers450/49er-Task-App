@@ -12,15 +12,17 @@ from forms import LoginForm
 import bcrypt
 from models import Comment as Comment
 from forms import RegisterForm, LoginForm, CommentForm
-import sympy
 import helperFuncs as help
 from sqlalchemy import exc
+import matplotlib as mplt
 
 app = Flask(__name__)  # create an app
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sweDatabase.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 app.config["SECRET_KEY"] = "SE3155"
+
+mplt.use("SVG")
 
 db.init_app(app)
 with app.app_context():
@@ -61,12 +63,15 @@ def get_note(note_id):
 
         form = CommentForm()
 
-        sympy.preview(
-            my_note.text,
-            viewer="file",
-            filename="static\\latex.png",
-            euler=False,
-        )
+        if my_note.uses_latex:
+            try:
+                help.renderLatex(my_note.text)
+                help.cropImage()
+                if user.view_mode == 0:
+                    help.invertImage()
+
+            except RuntimeError:
+                return "<h1>Error: Invalid LaTeX</h1>"
 
         return render_template(
             "note.html",

@@ -70,7 +70,7 @@ def get_note(note_id):
                 if user.view_mode == 0:
                     help.invertImage()
 
-            except RuntimeError:
+            except ValueError:
                 return "<h1>Error: Invalid LaTeX</h1>"
 
         return render_template(
